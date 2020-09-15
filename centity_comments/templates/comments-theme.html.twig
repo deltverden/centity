@@ -1,0 +1,45 @@
+{{ attach_library('centity_comments/global-style') }}
+<div class="comments-theme">
+  {% for w in comments.window %}
+    <div class="block-window">
+      <div class="block-head">
+        <div class="block-author">
+          <div class="author-head">
+            {% if w.avatar == 'default.png' %}
+              <img class="author-avatar" src="modules/custom/comments/images/default.png" alt="Avatar">
+            {% else %}
+              <img class="author-avatar" src="{{ w.avatar }}" alt="Avatar">
+            {% endif %}
+          </div>
+          <div class="author-contact">
+            <div class="contact-head">
+              <h3 class="contact-name">{{ w.name }}</h3>
+              <div class="contact-inf">
+                <p class="contact-emone">{{ w.email }} | {{ w.phone }}</p>
+              </div>
+            </div>
+            <div class="contact-body">
+              <p>27.05.2020</p>
+            </div>
+          </div>
+          {% if is_admin %}
+            <div class="block-panel">
+              <div class="edit-btn">
+                <a id="edit-btn" href="/admin/comments/edit/{{ w.id }}">Edit</a>
+              </div>
+              <div class="delete-btn">
+                <a id="delete-btn" href="/admin/comments/delete/{{ w.id }}">Delete</a>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="block-body">
+        {% if w.image %}
+          <p class="body-image"><img src="{{ w.image }}" alt=""></p>
+        {% endif %}
+        <p class="body-content">{{ w.text | raw }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>

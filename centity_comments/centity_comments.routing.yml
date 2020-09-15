@@ -1,0 +1,7 @@
+entity_comments.page:
+  path: '/comments'
+  defaults:
+    _controller: 'Drupal\centity_comments\Controller\Comments::get'
+    _title: 'Comments'
+  requirements:
+    _access: 'TRUE'
