@@ -1,0 +1,5 @@
+name: Centity
+type: module
+description: 'Provides Centity entity.'
+package: Custom Entity
+core: 8.x

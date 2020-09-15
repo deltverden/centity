@@ -1,0 +1,10 @@
+entity.centity.collection:
+  title: 'Centity: Centity Listing'
+  route_name: entity.centity.collection
+  description: 'List Centity'
+  weight: 10
+centity.admin.structure.settings:
+  title: Centity Settings
+  description: 'Configure Centity entity'
+  route_name:  centity.centity_settings
+  parent: system.admin_structure

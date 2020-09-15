@@ -1,0 +1,7 @@
+centity.centity_add:
+  route_name: centity.centity_add
+  title: 'Add Centity'
+
+  appears_on:
+    - entity.centity.collection
+    - entity.centity.canonical
