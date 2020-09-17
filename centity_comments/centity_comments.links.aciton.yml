@@ -1,0 +1,6 @@
+centity.comments_add:
+  route_name: entity_comments.page
+  title: 'Add Comment'
+
+  appears_on:
+    - entity_comments.page

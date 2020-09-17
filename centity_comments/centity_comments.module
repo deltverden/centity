@@ -1,4 +1,5 @@
 <?php
+
 function centity_comments_theme($existing, $type, $theme, $path) {
   return [
     'comments_theme' => [
