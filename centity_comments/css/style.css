@@ -45,7 +45,7 @@ div[aria-label="Error message"].add-edit-comments {
   color: #734c00;
 }
 
-.field--name-name input, .field--name-email input, .field--name-phone input, .field--name-text textarea {
+.field--name-name input, .field--name-email input, .field--name-phone input, .field--name-text .form-textarea-wrapper, .field--name-text .filter-wrapper {
   border: 2px solid black !important;
   outline: none;
 }
@@ -68,9 +68,10 @@ div[aria-label="Error message"].add-edit-comments {
 
 .addcomment-form .form-textarea-wrapper {
   width: 700px;
+  border: 2px solid black;
 }
 
-.addcomment-form .description, .addcomment-form label, .image-preview, .image-widget-data {
+.addcomment-form .description, .image-preview, .image-widget-data {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,11 +170,6 @@ div[aria-label="Error message"].add-edit-comments {
 }
 
 .contact-emone {
-  color: rgba(65, 76, 85, 0.91);
-  font-size: 0.8em;
-}
-
-.contact-body p {
   color: rgba(65, 76, 85, 0.91);
   font-size: 0.8em;
 }
