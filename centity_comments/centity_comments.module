@@ -5,6 +5,7 @@ function centity_comments_theme($existing, $type, $theme, $path) {
     'comments_theme' => [
       'variables' => [
         'comments' => 'comments',
+        'addcomment' => 'addcomment'
       ],
     ]
   ];

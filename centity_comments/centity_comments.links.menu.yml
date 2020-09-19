@@ -1,0 +1,6 @@
+catalogue.page:
+  title: 'Comments'
+  description: 'Comments for custom entity (centity).'
+  route_name: centity_comments.page
+  weight: 10
+  menu_name: main

@@ -2,13 +2,11 @@
 
 namespace Drupal\centity\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\centity\CentityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Class Centity
@@ -20,17 +18,14 @@ use Drupal\user\UserInterface;
  *   label = @Translation("Centity entity"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\centity\CentityListBuilder",
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "form" = {
- *       "add" = "Drupal\centity\Form\CentityForm",
- *       "edit" = "Drupal\centity\Form\CentityForm",
- *       "delete" = "Drupal\centity\Form\CentityDeleteForm",
- *     },
- *     "access" = "Drupal\centity\CentityAccessControlHandler",
+ *      "add" = "Drupal\centity_comments\Form\CommentsForm",
+ *      "edit" = "Drupal\centity_comments\Form\CommentsForm",
+ *      "delete" = "Drupal\centity_comments\Form\CommentsDeleteForm"
+ *     }
  *   },
  *   base_table = "centity",
- *   admin_permission = "administer centity entity",
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
@@ -38,10 +33,9 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/centity/{centity}",
- *     "edit-form" = "/centity/{centity}/edit",
- *     "delete-form" = "/centity/{centity}/delete",
- *     "collection" = "/centity/list"
+ *    "edit" = "/comments/{centity}/edit",
+ *    "delete" = "/comments/{centity}/delete",
+ *    "comments" = "/comments"
  *   },
  *   field_ui_base_route = "centity.centity_settings",
  * )
@@ -51,52 +45,9 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
   /**
    * {@inheritdoc}
-   *
-   * When a new entity instance is added, set the user_id entity reference to
-   * the current user as the creator of the instance.
-   */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += array(
-      'uid' => \Drupal::currentUser()->id(),
-    );
-  }
-
-  /**
-   * {@inheritdoc}
    */
   public function getCreatedTime() {
     return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('uid')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('uid')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('uid', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('uid', $account->id());
-    return $this;
   }
 
   /**
@@ -123,7 +74,7 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('The name.'))
+      ->setRequired(TRUE)
       ->setSettings([
         'default_value' => '',
         'max_length' => 128,
@@ -143,7 +94,7 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['email'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Email'))
-      ->setDescription(t('The email.'))
+      ->setRequired(TRUE)
       ->setSettings([
         'default_value' => '',
         'max_length' => 64,
@@ -163,9 +114,9 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['phone'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Phone number'))
-      ->setDescription(t('The phone number.'))
+      ->setRequired(TRUE)
       ->setSettings([
-        'default_value' => '',
+        'default_value' => '(000) 000-0000',
         'max_length' => 15,
         'text_processing' => 0,
       ])
@@ -183,7 +134,7 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['text'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Text'))
-      ->setDescription(t('The text.'))
+      ->setRequired(TRUE)
       ->setSettings([
         'default_value' => '',
         'text_processing' => 0,
@@ -202,7 +153,6 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['avatar'] = BaseFieldDefinition::create('image')
       ->setLabel(t('Avatar image'))
-      ->setDescription(t('The avatar.'))
       ->setSetting('handler', 'default')
       ->setSettings([
         'alt_field_required' => FALSE,
@@ -223,7 +173,6 @@ class Centity extends ContentEntityBase implements CentityInterface {
 
     $fields['image'] = BaseFieldDefinition::create('image')
       ->setLabel(t('Comment image'))
-      ->setDescription(t('The comment image.'))
       ->setSetting('handler', 'default')
       ->setSettings([
         'alt_field_required' => FALSE,
@@ -238,29 +187,6 @@ class Centity extends ContentEntityBase implements CentityInterface {
       ->setDisplayOptions('form', [
         'type' => 'image',
         'weight' => -1,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
-    $fields['uid'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('User Name'))
-      ->setDescription(t('The Name of the associated user.'))
-      ->setSetting('target_type', 'user')
-      ->setSetting('handler', 'default')
-      ->setDisplayOptions('view', [
-        'label' => 'above',
-        'type' => 'entity_reference_label',
-        'weight' => 0,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete',
-        'settings' => [
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ],
-        'weight' => 0,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

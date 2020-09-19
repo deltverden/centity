@@ -2,13 +2,19 @@
 
 namespace Drupal\centity_comments\Controller;
 
+use Drupal\centity\Entity\Centity;
 use Drupal\Core\Controller\ControllerBase;
 
 class Comments extends ControllerBase {
   public function get() {
+    $centity = Centity::create();
+    $addcomment = \Drupal::service('entity.form_builder')
+      ->getForm($centity, 'add');
+
     $storage = \Drupal::entityTypeManager()
       ->getStorage('centity');
-    $query = $storage->getQuery();
+    $query = $storage->getQuery()
+      ->sort('id', 'DESC');
     $result = $query->execute();
     $rows = $storage->loadMultiple($result);
 
@@ -47,7 +53,8 @@ class Comments extends ControllerBase {
 
     return [
       '#theme' => 'comments_theme',
-      '#comments' => $data
+      '#comments' => $data,
+      '#addcomment' => $addcomment
     ];
   }
 }

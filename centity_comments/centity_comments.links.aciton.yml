@@ -1,6 +1,7 @@
 centity.comments_add:
-  route_name: entity_comments.page
+  route_name: centity_comments.page
   title: 'Add Comment'
 
   appears_on:
-    - entity_comments.page
+    - centity_comments.page
+    - entity.centity.canonical

@@ -7,14 +7,3 @@ centity.view:
   route_name: entity.centity.canonical
   base_route: entity.centity.canonical
   title: View
-
-centity.page_edit:
-  route_name: entity.centity.edit_form
-  base_route: entity.centity.canonical
-  title: Edit
-
-centity.delete_confirm:
-  route_name:  entity.centity.delete_form
-  base_route:  entity.centity.canonical
-  title: Delete
-  weight: 10

@@ -45,8 +45,8 @@ div[aria-label="Error message"].add-edit-comments {
   color: #734c00;
 }
 
-.form-item-name input, .form-item-email input, .form-item-phone input, .form-item-text textarea {
-  border: 2px solid black;
+.field--name-name input, .field--name-email input, .field--name-phone input, .field--name-text textarea {
+  border: 2px solid black !important;
   outline: none;
 }
 
@@ -58,19 +58,30 @@ div[aria-label="Error message"].add-edit-comments {
   box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.3);
 }
 
-.addcomment-form .form-item {
+.addcomment-form .form-wrapper {
   margin: 10px 0;
 }
 
-.addcomment-form .form-item [aria-required="true"] {
-  padding: 5px 10px;
+.addcomment-form .form-wrapper input.required {
+  width: 700px;
 }
 
-.addcomment-form .form-item-avatar input::-webkit-file-upload-button, .addcomment-form .form-item-image input::-webkit-file-upload-button {
+.addcomment-form .form-textarea-wrapper {
+  width: 700px;
+}
+
+.addcomment-form .description, .addcomment-form label, .image-preview, .image-widget-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.addcomment-form .form-managed-file input.form-file::-webkit-file-upload-button {
   visibility: hidden;
 }
 
-.addcomment-form .form-item-avatar input, .addcomment-form .form-item-image input {
+.addcomment-form .form-managed-file input.form-file {
   background: none;
   border: 2px solid black;
   padding: 5px 8px;
@@ -79,7 +90,7 @@ div[aria-label="Error message"].add-edit-comments {
   transition: 0.3s;
 }
 
-.addcomment-form .form-item-avatar input:hover, .addcomment-form .form-item-image input:hover {
+.addcomment-form .form-managed-file input.form-file:hover {
   background: black;
   color: white;
 }
@@ -92,7 +103,7 @@ div[aria-label="Error message"].add-edit-comments {
   align-items: center;
 }
 
-.addcomment-form .form-item {
+.addcomment-form .form-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;

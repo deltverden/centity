@@ -1,12 +1,18 @@
 {{ attach_library('centity_comments/global-style') }}
 <div class="comments-theme">
+  <div class="add-comments">
+    <div id="form-system-messages"></div>
+    <div class="addcomment-form">
+      {{ addcomment }}
+    </div>
+  </div>
   {% for w in comments.window %}
     <div class="block-window">
       <div class="block-head">
         <div class="block-author">
           <div class="author-head">
             {% if w.avatar == 'default.png' %}
-              <img class="author-avatar" src="modules/custom/comments/images/default.png" alt="Avatar">
+              <img class="author-avatar" src="modules/custom/centity/centity_comments/images/default.png" alt="Avatar">
             {% else %}
               <img class="author-avatar" src="{{ w.avatar }}" alt="Avatar">
             {% endif %}
@@ -25,10 +31,10 @@
           {% if is_admin %}
             <div class="block-panel">
               <div class="edit-btn">
-                <a id="edit-btn" href="/admin/comments/edit/{{ w.id }}">Edit</a>
+                <a id="edit-btn" href="/comments/{{ w.id }}/edit">Edit</a>
               </div>
               <div class="delete-btn">
-                <a id="delete-btn" href="/admin/comments/delete/{{ w.id }}">Delete</a>
+                <a id="delete-btn" href="/comments/{{ w.id }}/delete">Delete</a>
               </div>
             </div>
           {% endif %}

@@ -1,47 +1,7 @@
-entity.centity.canonical:
-  path: '/centity/{centity}'
-  defaults:
-    _entity_view: 'centity'
-    _title: 'Centity Content'
-  requirements:
-    _entity_access: 'centity.view'
-
-entity.centity.collection:
-  path: '/centity/list'
-  defaults:
-    _entity_list: 'centity'
-    _title: 'Centity List'
-  requirements:
-    _permission: 'administer centity entity'
-
-centity.centity_add:
-  path: '/centity/add'
-  defaults:
-    _entity_form: centity.add
-    _title: 'Add Centity'
-  requirements:
-    _entity_create_access: 'centity'
-
-entity.centity.edit_form:
-  path: '/centity/{centity}/edit'
-  defaults:
-    _entity_form: centity.edit
-    _title: 'Edit Centity'
-  requirements:
-    _entity_access: 'centity.edit'
-
-entity.centity.delete_form:
-  path: '/centity/{centity}/delete'
-  defaults:
-    _entity_form: centity.delete
-    _title: 'Delete Centity'
-  requirements:
-    _entity_access: 'centity.delete'
-
 centity.centity_settings:
   path: 'admin/structure/centity_settings'
   defaults:
     _form: '\Drupal\centity\Form\CentitySettingsForm'
     _title: 'Centity Settings'
   requirements:
-    _permission: 'administer centity entity'
+    _permission: 'administer entity'

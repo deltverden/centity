@@ -1,7 +1,23 @@
-entity_comments.page:
+centity_comments.page:
   path: '/comments'
   defaults:
     _controller: 'Drupal\centity_comments\Controller\Comments::get'
     _title: 'Comments'
+  requirements:
+    _access: 'TRUE'
+
+entity.centity_comments.edit:
+  path: '/comments/{centity}/edit'
+  defaults:
+    _entity_form: centity.edit
+    _title: 'Edit comment'
+  requirements:
+    _access: 'TRUE'
+
+entity.centity_comments.delete:
+  path: '/comments/{centity}/delete'
+  defaults:
+    _entity_form: centity.delete
+    _title: 'Delete comment'
   requirements:
     _access: 'TRUE'
