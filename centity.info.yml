@@ -3,6 +3,3 @@ type: module
 description: 'Provides Centity entity.'
 package: Custom Entity
 core: 8.x
-
-dependencies:
-  - centity_comments
