@@ -1,3 +1,10 @@
+.messages--error {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: -8px 0 0 #e62600 !important;
+}
+
 .comments-theme {
   font-family: 'Titillium Web', sans-serif;
   margin: auto;
@@ -69,13 +76,6 @@ div[aria-label="Error message"].add-edit-comments {
 .addcomment-form .form-textarea-wrapper {
   width: 700px;
   border: 2px solid black;
-}
-
-.addcomment-form .description, .image-preview, .image-widget-data {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .addcomment-form .form-managed-file input.form-file::-webkit-file-upload-button {
