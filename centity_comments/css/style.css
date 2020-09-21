@@ -227,3 +227,18 @@ div[aria-label="Error message"].add-edit-comments {
   background: black;
   color: white;
 }
+
+.pager ul.pager__items li.pager__item a {
+  padding: 5px 10px;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid black;
+  transition: 0.3s;
+}
+
+.pager ul.pager__items li.pager__item a:hover {
+  background: black;
+  color: white;
+}

@@ -14,6 +14,7 @@ class Comments extends ControllerBase {
     $storage = \Drupal::entityTypeManager()
       ->getStorage('centity');
     $query = $storage->getQuery()
+      ->pager(2)
       ->sort('id', 'DESC');
     $result = $query->execute();
     $rows = $storage->loadMultiple($result);
@@ -51,10 +52,16 @@ class Comments extends ControllerBase {
       'window' => $comments
     ];
 
-    return [
+    $display[] = [
       '#theme' => 'comments_theme',
       '#comments' => $data,
       '#addcomment' => $addcomment
     ];
+
+    $display['paginate'] = [
+      '#type' => 'pager'
+    ];
+
+    return $display;
   }
 }
